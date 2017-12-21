@@ -1,0 +1,20 @@
+.App {
+  text-align: center;
+  height: 500px;
+  display: flex;
+  border: 1px solid #000;
+  flex-direction: column;
+  overflow: auto;
+}
+.header{
+  position: sticky;
+  height: 60px;
+  flex:none;
+  top: 0px;
+  background: #5d5d5d;
+}
+.container{
+    background: lightblue;
+    flex:none;
+    height: 300px;
+  }
