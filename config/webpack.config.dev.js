@@ -11,6 +11,7 @@ const eslintFormatter = require('react-dev-utils/eslintFormatter');
 const ModuleScopePlugin = require('react-dev-utils/ModuleScopePlugin');
 const getClientEnvironment = require('./env');
 const paths = require('./paths');
+const px2rem = require('postcss-px2rem')
 
 // Webpack uses `publicPath` to determine where the app is being served from.
 // In development, we always serve from the root. This makes config easier.
@@ -88,6 +89,12 @@ module.exports = {
       // Support React Native Web
       // https://www.smashingmagazine.com/2016/08/a-glimpse-into-the-future-with-react-native-for-web/
       'react-native': 'react-native-web',
+      'components':path.join(__dirname,'../src/components'),
+      'actions':path.join(__dirname,'../src/actions'),
+      'containers':path.join(__dirname,'../src/containers'),
+      'reducers':path.join(__dirname,'../src/reducers'),
+      'stores':path.join(__dirname,'../src/stores'),
+      'common':path.join(__dirname,'../src/common'),
     },
     plugins: [
       // Prevents users from importing files from outside of src/ (or node_modules/).
@@ -157,7 +164,7 @@ module.exports = {
           // In production, we use a plugin to extract that CSS to a file, but
           // in development "style" loader enables hot editing of CSS.
           {
-            test: /\.css$/,
+            test: /\.(css|less)$/,
             use: [
               require.resolve('style-loader'),
               {
@@ -183,8 +190,12 @@ module.exports = {
                       ],
                       flexbox: 'no-2009',
                     }),
+                      px2rem({remUnit:75})
                   ],
                 },
+              },
+              {
+                loader: require.resolve('less-loader')
               },
             ],
           },
