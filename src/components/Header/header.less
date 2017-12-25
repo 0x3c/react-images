@@ -1,24 +1,50 @@
 .header-warpper{
-    height: 60px;   
+    height: 90px;   
+    // height: 7%;
     width: 100%;
     background: #000;
     position: fixed;
     top: 0;
-    transition: all 0.4s linear;
-    display: flex;
-}
-.header-focus{
     right: 0;
-}
-.header-blur{
-    right: -70%;   
-}
-.header-menu-icon{
-    color: #fff;
-    // font-size: 40px;
-    font-size: 75%;
-    flex: none;
-}
-.header-menu-icon:hover{
-    color: lightblue;
+    transition: all 0.4s linear;
+    // 菜单图标
+    .header-menu{
+        padding-top: 10px;
+        float: left;
+        color: #fff;
+        height: inherit;
+        padding-left: 10px;
+        font-size: 60px;
+        // line-height: 90px;
+        flex: none;
+    }
+    .header-menu:hover{
+        color: lightblue;
+    }
+    // 标题
+    .header-title{
+        left: 15%;
+        right: 15%;
+        position: absolute;
+        height: 100%;
+        // background: lightblue;
+        color: #fff;
+        font-size: 80%;
+        text-align: center;
+        line-height: 90px;
+        overflow: hidden;
+        white-space: nowrap;
+        text-overflow: ellipsis;
+    }
+    // 搜索图标
+    .header-search{
+        padding-top: 10px;
+        float: right;
+        color: #fff;
+        height: inherit;
+        padding-right: 10px;
+        font-size: 60px;
+        // line-height: 90px;
+        flex: none;
+    }
 }

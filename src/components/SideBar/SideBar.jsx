@@ -17,9 +17,6 @@ export default class SideBar extends React.Component{
                 <div className="sidebar-menu">
 
                 </div>
-                <div className="sidebar-footer">
-
-                </div>
             </div>
         )
     }

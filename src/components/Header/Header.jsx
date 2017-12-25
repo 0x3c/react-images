@@ -13,10 +13,16 @@ export default class Header extends React.Component{
         const { handleShowSidebar } =this.props;
         return(
             
-            <div className={true ? "header-warpper header-focus" : "header-warpper header-blur"}>
-                <span className="header-menu-icon" onClick={handleShowSidebar}>
+            <div className="header-warpper">
+                <span className="header-menu" onClick={handleShowSidebar}>
                     <FontAwesome name="list-ul" />
                 </span>
+                <div className="header-title">
+                    das dasAs的的植入郭先生
+                </div>
+                <div className="header-search">
+                <FontAwesome name="search" />
+                </div>
             </div>
         )
     }
