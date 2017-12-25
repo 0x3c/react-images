@@ -8,11 +8,11 @@ export default class SideBar extends React.Component{
         }
     }
     render(){
-        const { sidebarToggle,showSideBar } = this.props;
+        const { focus,handleHideSidebar } = this.props;
         return(
-            <div className={!sidebarToggle ? "sidebar-container sidebar-container-onHide":"sidebar-container"}>
+            <div className={focus ? "sidebar-container":"sidebar-container sidebar-container-blur"}>
                 <div className="sidebar-user">
-                    <button onClick={showSideBar}>隐藏</button>
+                    <button onClick={handleHideSidebar}>隐藏</button>
                 </div>
                 <div className="sidebar-menu">
 

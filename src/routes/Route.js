@@ -2,7 +2,7 @@ import React from 'react'
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom'
 
 import SideBar from 'containers/SideBar'
-import Header from 'components/Header'
+import Header from 'containers/Header'
 
 
 const Routes=()=>(

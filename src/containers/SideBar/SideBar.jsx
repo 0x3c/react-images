@@ -1,6 +1,6 @@
 import { connect } from 'react-redux'
 
-import { uiSidebarToggle } from 'actions'
+import { hideSidebar } from 'actions'
 import SideBar from 'components/SideBar'
 
 /* 容器组件,包装 SideBar UI */
@@ -8,14 +8,14 @@ import SideBar from 'components/SideBar'
 
 /* state 映射到 props,订阅 state 部分属性,订阅属性更新则重新渲染 */
 const mapStateToProps = (state) => {
-    return { sidebarToggle: state.sidebarToggle };
+    return { focus: state.sidebarStatus.focus };
 };
 
 /* 绑定 dispatch 映射到 ui */
 const mapDispatchToProps = (dispatch) => {
     return {
-        showSideBar: () => {
-            dispatch(uiSidebarToggle);
+        handleHideSidebar: () => {
+            dispatch(hideSidebar());
         }
     };
 };

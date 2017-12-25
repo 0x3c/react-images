@@ -1,14 +1,16 @@
-export const SIDEBAR_UI_TOGGLE="Sidebar_Ui_Toggle";
-export const HEADER_UI_TOGGLE="Header_Ui_Toggle";
+export const SHOW_SIDEBAR=Symbol("SHOW_SIDEBAR");
+export const HIDE_SIDEBAR=Symbol("HIDE_SIDEBAR");
 
-export const uiSidebarToggle=()=>{
+
+export const showSidebar=()=>{
     return{
-        type: SIDEBAR_UI_TOGGLE,
+        type: SHOW_SIDEBAR,
+        payload:{focus:true}
     };
 }
-export const uiHeaderToggle=(isShow)=>{
+export const hideSidebar=()=>{
     return{
-        type: HEADER_UI_TOGGLE,
-        isShow,
+        type: HIDE_SIDEBAR,
+        payload:{focus:false}
     };
 }

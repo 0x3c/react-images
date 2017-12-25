@@ -1,12 +1,12 @@
 import { createStore } from 'redux'
 import reducer from '../reducers'
-
 /* 
     初始 state 状态 
 */
 const initState={
-    sidebarToggle:false,
-    headerToggle:true,
+    sidebarStatus:{
+        focus:false,
+    }
 }
 
 /* 创建 stote */
