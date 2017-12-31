@@ -18,7 +18,7 @@ export default class Header extends React.Component{
                     <FontAwesome name="list-ul" />
                 </span>
                 <div className="header-title">
-                    das dasAs的的植入郭先生
+                    Title
                 </div>
                 <div className="header-search">
                 <FontAwesome name="search" />

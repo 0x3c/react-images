@@ -1,6 +1,7 @@
 export const SHOW_SIDEBAR=Symbol("SHOW_SIDEBAR");
 export const HIDE_SIDEBAR=Symbol("HIDE_SIDEBAR");
 
+/* Actions */
 
 export const showSidebar=()=>{
     return{

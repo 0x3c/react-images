@@ -4,24 +4,62 @@
     top: 0;
     bottom: 0;
     left: 0;
-    background: lightblue;
+    background: rgb(38,45,48);
     transition:all 0.3s linear;
     z-index: 55;
-}
-.sidebar-container-blur{
-    left: -70%;
-}
-
-.sidebar-user{
-    height: 150px;
-    background: lightcoral;
-    button{
-        width: 75px;
-        height: 75px;
-        font-size: 50px;
+    // 初始状态(-70% 隐藏)
+    &-blur{
+        left: -70%;
     }
-}
-.sidebar-menu{
-    height: 300px;
-    background: red;
+    // 用户信息
+    .sidebar-user{
+        height: 400px;
+        /* 包裹头像和用户名 */
+        .user-warpper{
+            width: 300px;
+            height: 300px;
+            margin: 0 auto;
+            // font-size: 14Px;
+            // 头像
+            .user-avatar{
+                >img{
+                  width: 300px;
+                  height: 300px;
+                  border-radius: 150px;  
+                }
+            }
+            // 用户名
+            .user-name{
+                // margin-top: 50px;
+                @height:100px;
+                height: @height;
+                line-height: @height;
+                font-size: @height * .4;
+                color: #fff;
+                text-align: center;
+            }
+        }
+    }
+    // 菜单区
+    .sidebar-menu{
+        .menu{
+            @height:100px;
+            text-align: center;
+            color: #fff;
+            border-bottom: 1px solid #40474A;
+            height: @height;
+            font-size: @height *.4;
+            line-height: @height;
+        }
+        .menu-active{
+            .menu;
+            background: lightblue;
+        }
+        .menu-normal{
+            .menu;
+            background: rgb(34,38,42);
+        }
+    }
+
+
 }

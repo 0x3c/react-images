@@ -1,8 +1,7 @@
 import { createStore } from 'redux'
 import reducer from '../reducers'
-/* 
-    初始 state 状态 
-*/
+
+// 初始 state 状态 
 const initState={
     sidebarStatus:{
         focus:false,
