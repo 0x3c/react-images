@@ -9,6 +9,7 @@ const Routes=()=>(
         <Router>
             <ul>
                 <SideBar />
+                <Header />>
                 <Switch>
                     <Route path="/" exact component={ Header } />
                 </Switch>
