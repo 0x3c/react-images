@@ -13,6 +13,7 @@ const Routes=()=>(
                 <Switch>
                     <Route path="/" exact component={ Header } />
                 </Switch>
+                <img src="http://d.hiphotos.baidu.com/image/pic/item/b58f8c5494eef01fa17fd5ebe2fe9925bc317db1.jpg" alt="" width="100%"/>
             </ul>
         </Router>
 );

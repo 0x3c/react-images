@@ -1,6 +1,7 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 
+
 import Hammer from 'react-hammerjs'
 import {NavLink} from 'react-router-dom'
 import './sidebar.less'
@@ -12,22 +13,45 @@ import avatar from '../../common/img/avatar.jpeg'
 //             </li>
 //         </NavLink>
 // )
-const list=[{name:"首页",link:"/"},{name:"美女",link:"/meinv"},{name:"动物",link:"/dongwu"},]
 
 export default class SideBar extends React.Component{
     constructor(props){
         super(props);
         this.state={
-        }
+            sort:{},
+            data:[]
+        };
+        this.callback=this.callback.bind(this);
+    }
+    callback(data){
+        console.log(data)
+    }
+    
+    componentDidMount(){
+        const { handleInitDataSort } =this.props;
+        handleInitDataSort();
+        // fetch('../sort.json')
+        // .then(resp=>resp.json())
+        // .then(json=>this.setState({sort:json}))
+        // .catch(err=>console.log(err))
+
+        // fetch('/data/imgs?col=美女&tag=全部&sort=0&pn=10&rn=10&p=channel&from=1')
+        // .then(resp=>resp.json())
+        // .then(json=>this.setState({data:json.imgs}))
+        // .catch(err=>console.log(err))
     }
     render(){
-        const { focus,handleHideSidebar } = this.props;
+        const {  dataSort, focus, handleHideSidebar } = this.props;
         
-        const li=list.map((item,key)=>(
-            <NavLink to={item.link} className="menu" activeClassName="menu-active" exact strict key={key} >
-                {item.name}
-            </NavLink>
-        ))
+
+        const nav=((typeof dataSort) ==='object' && dataSort.length>0)
+                ?
+                dataSort.map((item,index)=>(
+                    <NavLink key={index} to={`${item.subUrl}`}> {item.col} </NavLink>
+                ))
+                :
+                null;
+
         return(
             <Hammer onSwipeLeft={handleHideSidebar} >
                 <div className={focus ? "sidebar-container":"sidebar-container sidebar-container-blur"}>
@@ -43,7 +67,7 @@ export default class SideBar extends React.Component{
                     {/* 菜单区 */}
                     <ul className="sidebar-menu">
                         {/* 导航连接 */}
-                        {li}
+                        { nav }
                     </ul>
                 </div>
             </Hammer>
