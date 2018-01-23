@@ -6,13 +6,15 @@ import Hammer from 'react-hammerjs'
 import {NavLink} from 'react-router-dom'
 import './sidebar.less'
 import avatar from '../../common/img/avatar.jpeg'
-// const LiLink=(props)=>(
-//         <NavLink to={props.to} className="menu-normal" activeClassName="menu-active">
-//             <li>
-//                 {props.item}
-//             </li>
-//         </NavLink>
-// )
+
+// 导航组件
+const MyNav=(props)=>(
+        <NavLink to={props.to} className="menu-normal" activeClassName="menu-active">
+            <li>
+                {props.title}
+            </li>
+        </NavLink>
+)
 
 export default class SideBar extends React.Component{
     constructor(props){
@@ -47,7 +49,7 @@ export default class SideBar extends React.Component{
         const nav=((typeof dataSort) ==='object' && dataSort.length>0)
                 ?
                 dataSort.map((item,index)=>(
-                    <NavLink key={index} to={`${item.subUrl}`}> {item.col} </NavLink>
+                    <MyNav key={index} to={`${item.subUrl}`} title={item.col} />
                 ))
                 :
                 null;
