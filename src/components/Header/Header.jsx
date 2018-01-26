@@ -5,9 +5,6 @@ import FontAwesome from 'react-fontawesome'
 export default class Header extends React.Component{
     constructor(props){
         super(props);
-        this.state={
-            hide:null
-        }
     }
     render(){
         const { handleShowSidebar } =this.props;

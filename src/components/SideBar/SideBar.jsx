@@ -31,16 +31,8 @@ export default class SideBar extends React.Component{
     
     componentDidMount(){
         const { handleInitDataSort } =this.props;
+        // 获取类别
         handleInitDataSort();
-        // fetch('../sort.json')
-        // .then(resp=>resp.json())
-        // .then(json=>this.setState({sort:json}))
-        // .catch(err=>console.log(err))
-
-        // fetch('/data/imgs?col=美女&tag=全部&sort=0&pn=10&rn=10&p=channel&from=1')
-        // .then(resp=>resp.json())
-        // .then(json=>this.setState({data:json.imgs}))
-        // .catch(err=>console.log(err))
     }
     render(){
         const {  dataSort, focus, handleHideSidebar } = this.props;
@@ -49,7 +41,7 @@ export default class SideBar extends React.Component{
         const nav=((typeof dataSort) ==='object' && dataSort.length>0)
                 ?
                 dataSort.map((item,index)=>(
-                    <MyNav key={index} to={`${item.subUrl}`} title={item.col} />
+                    <MyNav key={index} to={{pathname:item.subUrl, state:item.col}} title={item.col} />
                 ))
                 :
                 null;
