@@ -1,0 +1,36 @@
+.waterfull{
+    background: #EEE;
+    width: calc(~'100% - 17Px');
+    .waterfull-item{
+        width: calc(~'50% - 2px');
+        box-sizing: border-box;
+        // border: 1px solid grey;
+        border-radius: 7px;
+        box-shadow: 0 0 7px rgba(0, 0, 0, .2);
+        float: left;
+        // padding-top: 10Px;
+        // padding-right: 2px;
+        padding:10px 8Px;
+        position: relative;
+        img{
+            width: 100%;    
+            display: block;
+            cursor: pointer;
+        }
+        p{
+            // position: absolute;
+            // width: 80%;
+            // left: 10%;
+            bottom: 10Px;
+            font-size: 30px;
+            text-align: center;
+            padding:20Px 5Px;
+        }
+    }
+    &::after{
+        display: block;
+        content: "dasdas";
+        clear: both;
+        visibility: hidden;
+    }
+}
