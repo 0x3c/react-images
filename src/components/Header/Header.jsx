@@ -3,11 +3,8 @@ import './header.less'
 import FontAwesome from 'react-fontawesome'
 
 export default class Header extends React.Component{
-    constructor(props){
-        super(props);
-    }
     render(){
-        const { handleShowSidebar } =this.props;
+        const { title, handleShowSidebar } =this.props;
         return(
             
             <div className="header-warpper">
@@ -15,7 +12,7 @@ export default class Header extends React.Component{
                     <FontAwesome name="list-ul" />
                 </span>
                 <div className="header-title">
-                    Title
+                    {title}
                 </div>
                 <div className="header-search">
                 <FontAwesome name="search" />
