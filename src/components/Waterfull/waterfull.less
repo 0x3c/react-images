@@ -1,17 +1,17 @@
 .waterfull{
     background: #EEE;
     width: calc(~'100% - 17Px');
+    position: relative;
+    margin-top: 40px;
     .waterfull-item{
         width: calc(~'50% - 2px');
         box-sizing: border-box;
         // border: 1px solid grey;
         border-radius: 7px;
         box-shadow: 0 0 7px rgba(0, 0, 0, .2);
-        float: left;
-        // padding-top: 10Px;
-        // padding-right: 2px;
         padding:10px 8Px;
-        position: relative;
+        position: absolute;
+        visibility: hidden;
         img{
             width: 100%;    
             display: block;
@@ -27,10 +27,10 @@
             padding:20Px 5Px;
         }
     }
-    &::after{
-        display: block;
-        content: "dasdas";
-        clear: both;
-        visibility: hidden;
-    }
+    // &::after{
+    //     display: block;
+    //     content: "dasdas";
+    //     clear: both;
+    //     visibility: hidden;
+    // }
 }
