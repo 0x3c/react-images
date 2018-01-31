@@ -1,29 +1,16 @@
 import React from 'react'
 import { withRouter } from 'react-router'
 
-
+import Waterfull from 'components/Waterfull'
 import './gallery.less'
 
 class Gallery extends React.Component {
-    constructor(props) {
-        super(props);
-        this.state = {
-            count: 0
-        }
-        this.increase = this.increase.bind(this);
-    }
-    increase() {
-        const count = ++this.state.count;
-        this.setState({
-            count
-        })
-    }
     componentWillMount() {
-        console.log('准备挂载')
+        // console.log('准备挂载')
     }
     componentDidMount() {
         // console.log(this.props.history.location.state)
-        console.log('挂载完毕')
+        // console.log('挂载完毕')
     }
     componentWillUpdate() {
         console.log('准备更新')
@@ -51,10 +38,23 @@ class Gallery extends React.Component {
     }
     render() {
         console.log(`我被渲染了!  history: ${this.props.history}`)
+        const { totalNum, img_list, handleDataPic } = this.props;
+
+        const imgs = totalNum > 0 ? img_list.map((item) => (
+            <div key={item.id} className="img-box">
+                <img src={item.shareUrl} alt={item.title} />
+                <p> {item.desc} </p>
+            </div>
+        ))
+            : null
         return (
             <div className="gallery-container">
-                <div><button onClick={this.increase}>&emsp;+1&emsp;</button></div>
-                <div>{this.state.count}</div>
+                <div>
+                    <button onClick={() => { handleDataPic(`/data/imgs?col=${this.props.location.state.req_col}&tag=全部&sort=0&pn=10&rn=10&p=channel&from=1`) }}>&emsp;+1&emsp;</button>
+                </div>
+                <h2> 共{totalNum}张图片 </h2>
+                {/* {imgs} */}
+                <Waterfull img_list={img_list} />
             </div>
         )
     }

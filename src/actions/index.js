@@ -3,11 +3,13 @@ export const HIDE_SIDEBAR = Symbol("HIDE_SIDEBAR");
 export const GET_DATA_SORT = Symbol("GET_DATA_SORT");
 
 
-export const DATA_FETCHING = Symbol("DATA_FETCHING");
-export const DATA_SUCCESS = Symbol("DATA_SUCCESS");
-export const DATA_FAILED = Symbol("DATA_FAILED");
+export const DATA_SORT_FETCHING = Symbol("DATA_SORT_FETCHING");
+export const DATA_SORT_SUCCESS = Symbol("DATA_SORT_SUCCESS");
+export const DATA_SORT_FAILED = Symbol("DATA_SORT_FAILED");
 
-
+export const DATA_IMG_FETCHING = Symbol("DATA_IMG_FETCHING");
+export const DATA_IMG_SUCCESS = Symbol("DATA_IMG_SUCCESS");
+export const DATA_IMG_FAILED = Symbol("DATA_IMG_FAILED");
 
 /* Actions */
 
@@ -25,43 +27,72 @@ export const hideSidebar = () => {
         payload: { focus: false }
     };
 }
-// 获取分类标签数据
-export const getSortData = () => {
-    return {
-        type: GET_DATA_SORT,
-        payload: { focus: false }
-    };
-}
 
-// 通用 Action
-
+/* 请求分类标签数据 Action */
 // 开始请求
-export const fetching = (url) => {
+export const fetchingSort = (url) => {
     return {
-        type: DATA_FETCHING,
+        type: DATA_SORT_FETCHING,
         payload: url
     }
 }
 // 请求成功
-export const fetchSuccess=(data)=>{
+export const fetchSortSuccess=(data)=>{
     return {
-        type: DATA_SUCCESS,
+        type: DATA_SORT_SUCCESS,
         payload: data
     }
 }
 // 请求失败
-export const fetchFail=(err)=>{
+export const fetchSortFail=(err)=>{
     return {
-        type: DATA_FAILED,
+        type: DATA_SORT_FAILED,
         payload: err
     }
 }
-// Action Creator 返回一个函数，用于thunk的异步
-export const getData = (url) => (dispatch, getState) => {
+
+/* 请求图片数据 Action */
+// 开始请求
+export const fetchingImg = (url) => {
+    return {
+        type: DATA_IMG_FETCHING,
+        payload: true
+    }
+}
+// 请求成功
+export const fetchImgSuccess=(data)=>{
+    return {
+        type: DATA_IMG_SUCCESS,
+        payload: data
+    }
+}
+// 请求失败
+export const fetchImgFail=(err)=>{
+    return {
+        type: DATA_IMG_FAILED,
+        payload: err,
+    }
+}
+
+
+/* Action Creator 返回一个函数，用于thunk的异步 */
+
+// 获取分类标签数据
+export const getSortData = (url) => (dispatch, getState) => {
     // 开始请求
-    dispatch(fetching(url));    
+    dispatch(fetchingSort(url));    
     return fetch(url)
     .then(resp=>resp.json())
-    .then(json=>dispatch(fetchSuccess(json)))
-    .catch(err=>dispatch(fetchFail(err)));
+    .then(json=>dispatch(fetchSortSuccess(json)))
+    .catch(err=>dispatch(fetchSortFail(err)));
+}
+
+// 获取图片数据
+export const getImgData = (url) => (dispatch, getState) => {
+    // 开始请求
+    dispatch(fetchingImg(url));    
+    return fetch(url)
+    .then(resp=>resp.json())
+    .then(json=>dispatch(fetchImgSuccess(json)))
+    .catch(err=>dispatch(fetchImgFail(err)));
 }
