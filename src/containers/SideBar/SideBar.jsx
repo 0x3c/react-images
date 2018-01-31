@@ -1,6 +1,6 @@
 import { connect } from 'react-redux'
 
-import { hideSidebar, getData } from 'actions'
+import { hideSidebar, getSortData } from 'actions'
 import SideBar from 'components/SideBar'
 
 /* 容器组件,包装 SideBar UI */
@@ -23,7 +23,7 @@ const mapDispatchToProps = (dispatch) => {
         },
         // 发送 获取类别 Action
         handleInitDataSort:()=>{
-            dispatch(getData('../sort.json'));
+            dispatch(getSortData('../sort.json'));
         }
     };
 };
