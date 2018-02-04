@@ -10,15 +10,28 @@ const initState = {
         data_sort: []
     },
     galleryStatus: {
-        isFetching:false,            // 正在获取数据
-        resp:{},                     // 获取内容
-        totalNum: 0,                 // 总数
+        // UI状态
+        isFetching:false,           // 是否正在获取数据
+        need_render: false,         // 是否有新数据需要渲染
+        need_layout:false,          // 需要布局
+        need_update: false,         // 是否有新数据需要更新
+        img_loaded: false,        // 图片是否载入完成
+        startIndex:0,               //操作 dom
+        endIndex:0,                 //操作 dom
+        
+        //瀑布流
+        column:3,                   // 默认两列
+        height:[0,0,0],               // 默认两列初始高度
+
+        // 请求数据
+        resp:{},                    // 获取内容
+        totalNum: 0,                // 总数
         return_Number:10,
-        img_list: [],                // 图片信息列表
-        need_updata: false,          // 有新数据需要渲染
-        request_limit: 10,           // url 请求参数, 默认请求 10 个图片数据
-        request_start: 0,            // url 请求参数, 默认请求数据的位置从索引为 0 
-        request_title: "美女",         // url 请求参数, 默认类别为 "美女"
+        img_list: [],               // 总图片信息列表
+        last_list:[],               // 最近一次获取的图片列表      
+        request_rn: 10,          // url 请求参数, 默认请求 10 个图片数据
+        request_pn: 0,           // url 请求参数, 默认请求数据的位置从索引为 0 
+        request_col: "美女",      // url 请求参数, 默认类别为 "美女"
     },
     main: {
         title: '首页',               // 当前标题
