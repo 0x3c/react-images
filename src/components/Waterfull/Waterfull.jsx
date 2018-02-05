@@ -1,6 +1,7 @@
 import React from 'react'
 
 import './waterfull.less'
+import FontAwesome from 'react-fontawesome'
 
 const MyPic = (props) => (
     <div className="waterfull-item" style={{ width: 100 / props.column + '%' }}>
@@ -15,9 +16,10 @@ const MyPic = (props) => (
 export default class Waterfull extends React.Component {
     constructor(props) {
         super(props);
-        this.scroll = this.scroll.bind(this)
-        this.layout = this.layout.bind(this)
-        this.allImgsIsComplete = this.allImgsIsComplete.bind(this)
+        this.scroll = this.scroll.bind(this);
+        this.layout = this.layout.bind(this);
+        this.allImgsIsComplete = this.allImgsIsComplete.bind(this);
+        this.returnTop = this.returnTop.bind(this);
     }
     //  布局
     layout(img_list) {
@@ -69,7 +71,7 @@ export default class Waterfull extends React.Component {
         // console.log(document.documentElement.clientHeight)
         // console.log(window.innerHeight)
     }
-    // 返回数组中最大数的索引
+    // 返回数组中最小数的索引
     minIndexOfArr = (arr) => {
         if (!arr instanceof Array) {
             return new Error('参数必须为数组');
@@ -79,7 +81,6 @@ export default class Waterfull extends React.Component {
             [min, index] = v < min ? [v, k] : [min, index];
 
         })
-        // console.log(arr + ' minIndex: ' + index)
         return index;
     }
     // 判断图片是否全部加载完毕
@@ -120,6 +121,20 @@ export default class Waterfull extends React.Component {
                 }
             }
         }, 100)
+    }
+
+    // 回到顶部
+    returnTop() {
+        let top = this.refs.waterfullContainer.scrollTop;
+        const y=top/100;
+        const timer = setInterval(() => {
+            top -= y;
+            if (top < 0) { top = 0 }
+            this.refs.waterfullContainer.scrollTo(0, top);
+            if (top === 0) {
+                clearInterval(timer)
+            }
+        }, 500/100)
     }
     componentWillMount() {
 
@@ -169,15 +184,22 @@ export default class Waterfull extends React.Component {
         // handleGetData,获取更多数据
 
         // const { column, img_list, handleGetData } = this.props;
-        const { img_list, column } = this.props;
+        const { img_list, column, totalNum } = this.props;
         const List = img_list.map((item) => (
             <MyPic key={item.id} title={item.title} imgUrl={item.shareUrl} column={column} />
         ))
         console.log('我被渲染了...')
         return (
-            <div className="waterfull" ref='waterfull'>
-                {List}
+            <div className="waterfull-container" ref='waterfullContainer'>
+                <h2> 共{totalNum}张图片 </h2>
+                <div className="waterfull" ref='waterfull'>
+                    {List}
+                </div>
+                <div className="top" onClick={this.returnTop}>
+                    <FontAwesome name='angle-up'></FontAwesome>
+                </div>
             </div>
+
         )
     }
 }

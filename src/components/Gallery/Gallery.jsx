@@ -3,13 +3,12 @@ import { withRouter } from 'react-router'
 
 import Waterfull from 'components/Waterfull'
 import './gallery.less'
-import FontAwesome from 'react-fontawesome'
+
 
 class Gallery extends React.Component {
     constructor(props) {
         super(props);
         this.getPicEx = this.getPicEx.bind(this);
-        this.returnTop = this.returnTop.bind(this);
     }
     // 从 redux 中获取 url 相关信息，凑成完成 url ，并获取数据
     getPicEx(next_col) {
@@ -19,19 +18,7 @@ class Gallery extends React.Component {
         const url = `/data/imgs?col=${cur_url}&tag=全部&sort=1&pn=${request_pn}&rn=${request_rn}&p=channel&from=1`;
         handleDataPic(url);
     }
-    // 回到顶部
-    returnTop() {
-        let top = this.refs.container.scrollTop;
-        const y=top/100;
-        const timer = setInterval(() => {
-            top -= y;
-            if (top < 0) { top = 0 }
-            this.refs.container.scrollTo(0, top);
-            if (top === 0) {
-                clearInterval(timer)
-            }
-        }, 500/100)
-    }
+    
     componentWillMount() {
         // console.log('准备挂载,获取当前col,并更新到redux')
         const { handleInitUrl } = this.props;
@@ -81,16 +68,12 @@ class Gallery extends React.Component {
 
         return (
             <div className="gallery-container" ref='container'>
-                <h2> 共{totalNum}张图片 </h2>
                 {/* {imgs} */}
                 <Waterfull img_list={img_list} heightArr={heightArr} column={column}
                     need_render={need_render} startIndex={startIndex} endIndex={endIndex}
-                    need_update={need_update}
+                    need_update={need_update}   totalNum={totalNum}
                     forbidRender={forbidRender}
                     handleMorePic={this.getPicEx} handleDomIndex={handleDomIndex} />
-                <div className="top" onClick={this.returnTop}>
-                    <FontAwesome name='angle-up'></FontAwesome>
-                </div>
             </div>
         )
     }
