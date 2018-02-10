@@ -38,7 +38,6 @@ export default class Waterfull extends React.Component {
             item.style.left = left;
             item.style.visibility = 'visible';
         })
-
         startIndex = endIndex;
         handleDomIndex(startIndex, endIndex);
         // this.setState({ shouldUpdate: false });
@@ -126,7 +125,7 @@ export default class Waterfull extends React.Component {
     // 回到顶部
     returnTop() {
         let top = this.refs.waterfullContainer.scrollTop;
-        const y=top/100;
+        const y = top / 100;
         const timer = setInterval(() => {
             top -= y;
             if (top < 0) { top = 0 }
@@ -134,7 +133,7 @@ export default class Waterfull extends React.Component {
             if (top === 0) {
                 clearInterval(timer)
             }
-        }, 500/100)
+        }, 500 / 100)
     }
     componentWillMount() {
 
@@ -167,12 +166,7 @@ export default class Waterfull extends React.Component {
 
     }
     componentWillUpdate() {
-        const { need_update } = this.props;
-        if (need_update) {
-
-        } else {
-
-        }
+        // const { need_update, heightArr } = this.props;
     }
 
     componentDidUpdate() {

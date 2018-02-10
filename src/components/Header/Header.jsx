@@ -1,23 +1,27 @@
 import React from 'react'
+// import { withRouter } from 'react-router-dom'
 import './header.less'
 import FontAwesome from 'react-fontawesome'
 
-export default class Header extends React.Component{
-    render(){
-        const { title, handleShowSidebar } =this.props;
-        return(
-            
+class Header extends React.Component {
+    render() {
+        const { handleShowSidebar, request_col } = this.props;
+        // const title=this.props.location.state.req_title;
+        // console.log(title)
+        return (
             <div className="header-warpper">
                 <span className="header-menu" onClick={handleShowSidebar}>
                     <FontAwesome name="list-ul" />
                 </span>
                 <div className="header-title">
-                    {title}
+                    {request_col}
                 </div>
-                <div className="header-search">
-                <FontAwesome name="search" />
+                <div className="header-search" >
+                    {/* <FontAwesome name="search" /> */}
                 </div>
             </div>
         )
     }
 }
+
+export default Header;

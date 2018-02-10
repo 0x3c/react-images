@@ -33,9 +33,9 @@ export default class SideBar extends React.Component {
             ?
             dataSort.map((item, index) => (
                 // req_col 为请求类别字段,req_title 为请求类别名称
-                <NavLink key={index} to={{ pathname: item.subUrl, state: {req_col:item.col,req_title:item.col} }}
-                 className="menu-normal" activeStyle={{"backgroundColor": "lightblue"}}
-                 onClick={handleHideSidebar} >
+                <NavLink key={index} to={{ pathname: item.subUrl, state: { req_col: item.col, req_title: item.col } }}
+                    className="menu-normal" activeStyle={{ "backgroundColor": "lightblue" }}
+                    onClick={handleHideSidebar} >
                     {item.col}
                 </NavLink>
             ))
@@ -56,6 +56,10 @@ export default class SideBar extends React.Component {
                     </div>
                     {/* 菜单区 */}
                     <ul className="sidebar-menu">
+                        <NavLink to={{ pathname: '/search', state: { req_title: '搜索' } }} className="menu-normal" activeStyle={{ "backgroundColor": "lightblue" }}
+                            onClick={handleHideSidebar} >
+                            搜索
+                    </NavLink>
                         {/* 导航连接 */}
                         {nav}
                     </ul>

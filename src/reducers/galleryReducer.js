@@ -2,8 +2,6 @@ import { DATA_IMG_FAILED, DATA_IMG_SUCCESS, DATA_IMG_FETCHING } from 'actions'
 import { INIT_URL, UPDATA_DOM_INDEX, FORBID_RENDER } from 'actions/galleryAction'
 const galleryReducer = (galleryStatus = {}, action) => {
     switch (action.type) {
-
-
         // 禁止渲染
         case (FORBID_RENDER):
             return Object.assign({}, galleryStatus, {
@@ -26,7 +24,7 @@ const galleryReducer = (galleryStatus = {}, action) => {
                 endIndex:0,
                 resp: {},
                 totalNum: 0,
-                heightArr: [0, 0, 0],
+                heightArr: [0, 0],
             })
 
         /* 获取数据 */

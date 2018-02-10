@@ -5,22 +5,24 @@ import SideBar from 'containers/SideBar'
 import Header from 'containers/Header'
 import Gallery from 'containers/Gallery'
 import Container from 'containers/Container'
-
+import Search from 'containers/Search'
+import { Link } from 'react-router-dom'
 const Routes = () => (
     <Router>
-        <ul style={{"height":"100%"}}>
+        <ul style={{ "height": "100%" }}>
             <SideBar />
-            <Container>
-                <Header />
-                <Switch>
+            <Switch>
+                <Container>
+                    <Header />
+                    <Route path="/search" exact component={Search} />
+                    <Route path="/search/:key" exact component={Gallery} />
                     <Route path="/beauty" exact component={Gallery} />
                     <Route path="/star" exact component={Gallery} />
                     <Route path="/animation" exact component={Gallery} />
                     <Route path="/pet" exact component={Gallery} />
                     <Route path="/wallpaper" exact component={Gallery} />
-                </Switch>
-            </Container>
-            {/* <img src="http://d.hiphotos.baidu.com/image/pic/item/b58f8c5494eef01fa17fd5ebe2fe9925bc317db1.jpg" alt="" width="100%"/> */}
+                </Container>
+            </Switch>
         </ul>
     </Router>
 );
