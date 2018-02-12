@@ -35,15 +35,15 @@ const galleryReducer = (galleryStatus = {}, action) => {
                 request_pn, //当前索引指针后移
             })
         case (DATA_IMG_SUCCESS):
-            const { img_list }=galleryStatus;
-            const last_list = action.payload.imgs.slice(0, action.payload.returnNumber);// 返回图片数组多一个，需切割
+            const { img_list,return_Number }=galleryStatus;
+            const last_list = action.payload.imgs.slice(0, return_Number);// 返回图片数组多一个，需切割
 
             img_list.concat()
             return Object.assign({}, galleryStatus, {
                 isFetching: false,
                 resp: action.payload,
                 last_list: last_list,                                    // 最近一次请求到的图片列表
-                totalNum: action.payload.totalNum,                          // 总数
+                totalNum: action.payload.totalNum || action.payload.imgtotal,                          // 总数
                 img_list: img_list.concat(last_list),                    // 返回 当前图片列表和请求到的图片列表 
                 need_update: true,                           // 获取完数据，需要更新 dom  
                 need_render: true,

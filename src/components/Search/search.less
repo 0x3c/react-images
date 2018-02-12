@@ -48,17 +48,32 @@
             border:1px solid #CCC;
             border-top: none;
             li{
-                // height: 50px;
-                font: 14Px Arial;
-                padding: 0 10Px;
+                height: 50px;
+                font: 40% Arial;
+                padding: 0 20px;
                 color:#7A77C8;
-                .item-hover{
+                box-sizing: border-box;
+                &:hover{
                     background: #f0f0f0;
                 }
                 .search-delete{
                     float: right;
+                    text-align: center;
                     text-decoration: underline;
-                    cursor: pointer;
+                    cursor: pointer;    
+                    font-size: 80%;
+                    height: 50px;
+                    line-height: 50px;
+                    // display: flex;
+                    // flex-direction: row;
+                    // align-items: center;
+                    // justify-content: center;
+                }
+                .history-text{
+                    height: 50px;
+                    line-height: 50px;
+                    display: inline-block;
+                    width: 80%;
                 }
             }
         }

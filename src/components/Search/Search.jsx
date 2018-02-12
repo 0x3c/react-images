@@ -12,6 +12,7 @@ class Search extends React.Component {
             onFocus: false,
             searchText: '',
             hover: false,
+            history: []
         };
         this.handleSearch = this.handleSearch.bind(this);
         this.handleClearHistory = this.handleClearHistory.bind(this);
@@ -20,10 +21,13 @@ class Search extends React.Component {
         this.handleBlur = this.handleBlur.bind(this);
         this.handleSelect = this.handleSelect.bind(this);
         this.handleHover = this.handleHover.bind(this);
+        this.deleteOneHistory = this.deleteOneHistory.bind(this);
     }
+    // 清楚历史
     handleClearHistory() {
         localStorage.removeItem('searchHistory');
     }
+    // 绑定 input 状态
     handleChange() {
         const searchText = this.refs.searchInput.value;
         this.setState({ searchText })
@@ -31,47 +35,70 @@ class Search extends React.Component {
     handleHover(e) {
         this.setState({ hover: true });
     }
+    // 选择历史记录复制到 搜索框
     handleSelect(e) {
-        let select = e.target.value='';
-        console.log(select);
+        const select = e.currentTarget.textContent;
+        this.setState({ searchText: select })
     }
+    // 删除当前选择的历史记录
+    deleteOneHistory(e) {
+        const text = e.currentTarget.previousSibling.textContent;
+        const { history } = this.state;
+        const index = history.indexOf(text);
+        history.splice(index, 1);
+        this.setState({ history });
+    }
+
     handleFocus() {
         this.setState({ onFocus: true });
     }
     handleBlur() {
         this.setState({ onFocus: false });
     }
+
+    // 搜索
     handleSearch() {
         // 判断非空
         const searchText = this.refs.searchInput.value;
         if (searchText === '') {
             return;
         }
-        // 搜索记录存入 storage;
-        let searchHistory = JSON.parse(localStorage.getItem('searchHistory'));
-        if (!searchHistory) {
-            searchHistory = { search: [] };
+        const { history } = this.state;
+        history.push(searchText);
+        this.setState({ history });
+        this.props.history.push({ pathname: `/search/key`, search: searchText, state: { req_col: searchText, req_title: searchText } });
+    }
+    componentWillMount() {
+        // 设置 request_col
+        const { handleInitUrl } = this.props;
+        handleInitUrl('搜索');
+
+        // 存入 localStorage中历史记录
+        const searchHistory = JSON.parse(localStorage.getItem('searchHistory'));
+        if (searchHistory) {
+            const history = searchHistory.search;
+            this.setState({ history })
         }
-        searchHistory.search.push(searchText);
-        localStorage.setItem("searchHistory", JSON.stringify(searchHistory));
-        console.log(searchHistory);
-        // this.setState({ clear: true });
-        // this.props.history.push()
     }
     componentDidMount() {
+        // 聚焦到搜索框
         this.refs.searchInput.focus();
     }
+    componentWillUnmount() {
+        // 卸载前将 history 存入 localStorage
+        console.log('卸载前存入 localStorage')
+        const { history } = this.state;
+        localStorage.setItem('searchHistory', JSON.stringify({ search: history }));
+    }
     render() {
-        let searchHistory = JSON.parse(localStorage.getItem('searchHistory'));
-        searchHistory = searchHistory ? searchHistory.search : null;
-        const { onFocus, searchText, hover } = this.state;
-        const history = searchHistory ? searchHistory.map((value, i) => (
-            <MyLi key={i} deleteHistoryHandler={() => { console.log('deleting...') }}>
-                <span onClick={this.handleSelect} >{value}</span>
+        const { onFocus, searchText, history } = this.state;
+
+        const historyDOM = history.map((value, i) => (
+            <MyLi key={i} deleteHistoryHandler={this.deleteOneHistory}>
+                <span className='history-text' onClick={this.handleSelect} >{value}</span>
                 {/* {hover && <span className='search-delete'>删除</span>} */}
             </MyLi>
         ))
-            : null;
         // console.log(onFocus)
         return (
             <div className="search">
@@ -83,13 +110,7 @@ class Search extends React.Component {
                         <FontAwesome name='search' />
                     </span>
                     {onFocus && <ul className="search-history">
-                        {history}
-                        {/* {history &&
-                            <li>
-                                <p className='search-clear' onClick={this.handleClearHistory}>清除全部历史记录</p>
-                            </li>
-                        } */}
-                        <MyLi className='search-clear'>大时代</MyLi>
+                        {historyDOM}
                     </ul>}
                 </div>
             </div>

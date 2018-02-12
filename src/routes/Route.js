@@ -6,7 +6,7 @@ import Header from 'containers/Header'
 import Gallery from 'containers/Gallery'
 import Container from 'containers/Container'
 import Search from 'containers/Search'
-import { Link } from 'react-router-dom'
+import { Redirect } from 'react-router-dom'
 const Routes = () => (
     <Router>
         <ul style={{ "height": "100%" }}>
@@ -21,6 +21,7 @@ const Routes = () => (
                     <Route path="/animation" exact component={Gallery} />
                     <Route path="/pet" exact component={Gallery} />
                     <Route path="/wallpaper" exact component={Gallery} />
+                    <Redirect path="/" to={{ pathname: '/search' }} />
                 </Container>
             </Switch>
         </ul>
