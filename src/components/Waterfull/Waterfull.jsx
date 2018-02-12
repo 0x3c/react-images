@@ -42,7 +42,7 @@ export default class Waterfull extends React.Component {
         handleDomIndex(startIndex, endIndex);
         // this.setState({ shouldUpdate: false });
     }
-    // 无限加载
+    // 无限加载,函数节流
     scroll() {
         let awit = false;
         return () => {
@@ -96,7 +96,7 @@ export default class Waterfull extends React.Component {
         // let { loadedTimer, isloaded } = this.state;
 
         loadedTimer = setInterval(() => {
-            console.log('加载完了吗?')
+            // console.log('加载完了吗?')
             // 加载完毕
             if (imgList.length === 0) {
                 isloaded = true;
@@ -143,15 +143,9 @@ export default class Waterfull extends React.Component {
         this.refs.waterfull.parentNode.addEventListener('scroll', this.scroll())
     }
     shouldComponentUpdate(nextProps, nextState) {
-        // 若 shouldUpdate 为 false ，则不更新
-        // if (!nextState.shouldUpdate) {
-        //     nextState.shouldUpdate = true;
-        //     return false;
-        // }
         const { need_render } = nextProps;
         if (need_render) {
             // 需要渲染
-            console.log('需要渲染')
             nextProps.forbidRender()
             return true;
         } else {
@@ -180,12 +174,12 @@ export default class Waterfull extends React.Component {
         // const { column, img_list, handleGetData } = this.props;
         const { img_list, column, totalNum } = this.props;
         const List = img_list.map((item) => (
-            <MyPic key={item.id} title={item.title} imgUrl={item.shareUrl} column={column} />
+            <MyPic key={item.id || item.di} title={item.title || item.fromPageTitle} imgUrl={item.shareUrl || item.objURL} column={column} />
         ))
-        console.log('我被渲染了...')
+        // console.log('我被渲染了...')  
         return (
             <div className="waterfull-container" ref='waterfullContainer'>
-                <h2> 共{totalNum}张图片 </h2>
+                <h2> 为您找到约&nbsp; {totalNum}&nbsp; 张图片 </h2>
                 <div className="waterfull" ref='waterfull'>
                     {List}
                 </div>

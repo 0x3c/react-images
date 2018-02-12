@@ -5,9 +5,8 @@ import FontAwesome from 'react-fontawesome'
 
 class Header extends React.Component {
     render() {
+
         const { handleShowSidebar, request_col } = this.props;
-        // const title=this.props.location.state.req_title;
-        // console.log(title)
         return (
             <div className="header-warpper">
                 <span className="header-menu" onClick={handleShowSidebar}>
