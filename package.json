@@ -60,6 +60,10 @@
     "/data": {
       "target": "http://image.baidu.com",
       "changeOrigin": true
+    },
+    "/search": {
+      "target": "http://image.baidu.com",
+      "changeOrigin": true
     }
   },
   "jest": {
